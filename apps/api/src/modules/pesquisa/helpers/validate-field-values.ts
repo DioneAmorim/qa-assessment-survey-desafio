@@ -1,23 +1,22 @@
 import { BadRequestException } from "@nestjs/common";
-import { opcoes_padronizadas } from "@prisma/client";
 import { isFilled } from "../../../shared/helpers/is-filled";
 import type { PerguntaInput, RespostaInput } from "./types";
 
-const SATISFACTION_LEVEL_VALUES: opcoes_padronizadas[] = [
-  opcoes_padronizadas.muito_satisfeito,
-  opcoes_padronizadas.satisfeito,
-  opcoes_padronizadas.indiferente,
-  opcoes_padronizadas.insatisfeito,
-  opcoes_padronizadas.muito_insatisfeito,
-];
+const SATISFACTION_LEVEL_VALUES = [
+  "muito_satisfeito",
+  "satisfeito",
+  "indiferente",
+  "insatisfeito",
+  "muito_insatisfeito",
+] as const;
 
-const PERCEIVED_QUALITY_VALUES: opcoes_padronizadas[] = [
-  opcoes_padronizadas.excelente,
-  opcoes_padronizadas.bom,
-  opcoes_padronizadas.regular,
-  opcoes_padronizadas.ruim,
-  opcoes_padronizadas.pessimo,
-];
+const PERCEIVED_QUALITY_VALUES = [
+  "excelente",
+  "bom",
+  "regular",
+  "ruim",
+  "pessimo",
+] as const;
 
 export function validateFieldValues(
   pergunta: PerguntaInput,

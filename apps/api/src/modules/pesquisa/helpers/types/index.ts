@@ -1,4 +1,11 @@
-import { opcao, pergunta, pergunta_tipo, resposta } from "@prisma/client";
+export type PerguntaTipo =
+  | "texto_grande"
+  | "multipla_escolha"
+  | "opcoes_diversas"
+  | "pontuacao_0_a_5"
+  | "pontuacao_0_a_10"
+  | "nivel_satisfacao"
+  | "qualidade_percebida";
 
 export type ResponseField =
   | "opcaoId"
@@ -6,29 +13,25 @@ export type ResponseField =
   | "valorOpcaoTexto"
   | "valorNumerico";
 
-export type PerguntaInput = Pick<
-  pergunta,
-  | "id"
-  | "tipo"
-  | "respostaObrigatoria"
-  | "justificarResposta"
-  | "permitirOutro"
-> & {
-  opcoes: Pick<opcao, "id">[];
+export type PerguntaInput = {
+  id: number;
+  tipo: PerguntaTipo;
+  respostaObrigatoria: boolean;
+  justificarResposta: boolean;
+  permitirOutro: boolean;
+  opcoes: { id: number }[];
 };
 
-export type RespostaInput = Pick<resposta, "perguntaId"> &
-  Partial<
-    Pick<
-      resposta,
-      | "opcaoId"
-      | "valorOpcaoPadronizada"
-      | "valorOpcaoTexto"
-      | "valorNumerico"
-      | "outroTexto"
-      | "justificativaTexto"
-    >
-  >;
+export type RespostaInput = {
+  perguntaId: number;
+} & Partial<{
+  opcaoId: number | null;
+  valorOpcaoPadronizada: string | null;
+  valorOpcaoTexto: string | null;
+  valorNumerico: number | null;
+  outroTexto: string | null;
+  justificativaTexto: string | null;
+}>;
 
 export const ALLOWED_FIELD_BY_TYPE: Record<pergunta_tipo, ResponseField> = {
   texto_grande: "valorOpcaoTexto",

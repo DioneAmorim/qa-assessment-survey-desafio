@@ -10,7 +10,11 @@ export default defineWorkspace([
     test: {
       name: 'api',
       environment: 'node',
-      include: ['tests/unit/api/**/*.spec.ts', 'tests/integration/**/*.spec.ts'],
+      include: [
+        'tests/unit/api/**/*.spec.ts',
+        'tests/unit/survey-logic.spec.ts',
+        'tests/integration/**/*.spec.ts',
+      ],
     },
     resolve: {
       alias: {
