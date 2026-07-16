@@ -45,6 +45,19 @@ Durante o processo de testes manuais e exploratórios nas interfaces de listagem
 ### 🚨 Brechas de Validação de Sistema (Bugs de Consistência)
 * **Ausência de Validação no Encerramento:** Embora o campo *Data de lançamento* bloqueie datas passadas, o campo *Data de encerramento* aceita livremente datas retroativas (como datas de dias anteriores a hoje) sem exibir nenhum tipo de alerta ou bloqueio no frontend.
 
+### Bug — Mensagem de erro exibida indevidamente na tela inicial
+**Cenário**
+Ao acessar a tela de listagem de pesquisas pela primeira vez, sem realizar nenhuma ação.
+**Comportamento observado**
+A interface exibe simultaneamente “Erro ao carregar as pesquisas” e “Sem resultados”.
+**Comportamento esperado**
+Quando não houver pesquisas cadastradas, a tela deve exibir apenas o estado vazio (“Sem resultados” ou mensagem equivalente). A mensagem de erro deve aparecer somente quando houver falha real na requisição.
+*Impacto**
+O usuário pode interpretar que o sistema está com defeito, mesmo quando a ausência de dados é um estado válido.
+**Severidade:* Baixa
+**Severidade** prioridade média.
+
+
 ### 💡 Lacunas e Oportunidades de Regra de Negócio (Requirement Gaps)
 * **Definição de Período para Pesquisas de Curta Duração (Flash Surveys):**
   * *O comportamento atual:* O formulário permite que a data de lançamento e de encerramento sejam exatamente no mesmo dia (ex: 16/07/2026 — 16/07/2026).
